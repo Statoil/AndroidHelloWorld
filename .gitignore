@@ -31,3 +31,6 @@ local.properties
 *.ipr
 *~
 *.swp
+
+#OS files
+.DS_Store
