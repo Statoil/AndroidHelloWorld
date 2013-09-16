@@ -9,13 +9,17 @@ public class LunchMenuItem {
 
     public LunchMenuItem(String weekDayName, String courseName)
     {
-        this.weekDayName = weekDayName;
+        this.weekDayName = getWeekdayWithCapitalLetter(weekDayName);
         this.courseName = courseName;
+    }
+
+    public static String getWeekdayWithCapitalLetter(String weekDayName) {
+        return weekDayName.substring(0, 1).toUpperCase() + weekDayName.substring(1);
     }
 
     public void setWeekDayName(String name)
     {
-        weekDayName = name;
+        weekDayName = getWeekdayWithCapitalLetter(name);
     }
 
     public String getWeekDayName()
