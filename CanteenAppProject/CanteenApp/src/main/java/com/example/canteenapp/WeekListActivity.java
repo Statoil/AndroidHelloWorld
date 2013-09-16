@@ -55,7 +55,7 @@ public class WeekListActivity extends ListActivity {
         //NB: remember to add that activity to the manifest xml file
     }
 
-    private class LunchMenuAdapter extends BaseAdapter
+    public class LunchMenuAdapter extends BaseAdapter
     {
         private ArrayList<LunchMenuItem> lunches = new ArrayList<LunchMenuItem>();
 
