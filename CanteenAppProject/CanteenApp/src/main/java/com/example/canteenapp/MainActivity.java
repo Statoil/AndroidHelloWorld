@@ -15,13 +15,18 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.canteenapp.model.CanteenItem;
+import com.example.canteenapp.task.CanteensFetcher;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class MainActivity extends ListActivity {
 
     private CanteenListAdapter canteenListAdapter;
     public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String CANTEEN_ITEM = "canteenItem";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,9 @@ public class MainActivity extends ListActivity {
 
         canteenListAdapter = new CanteenListAdapter();
         setListAdapter(canteenListAdapter);
-        canteenListAdapter.downloadCanteens();
+        CanteensFetcher canteenFetcher = new CanteensFetcher(canteenListAdapter);
+        canteenFetcher.execute();
+
     }
 
     @Override
@@ -43,9 +50,17 @@ public class MainActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
 
         System.out.println("Item clicked: " + position);
+        CanteenItem canteenItem = canteenListAdapter.getList().get(position);
 
-        //TODO: Send the selected canteen id(name) to the intent
+        // We construct a "messaging" object called "Intent" here.
+        // This intent tells Android to start the 'WeekListActivity'
         Intent weekListIntent = new Intent(MainActivity.this, WeekListActivity.class);
+
+        // We also pass the 'CanteenItem' object the user selected
+        // from the list.
+        weekListIntent.putExtra(CANTEEN_ITEM, canteenItem);
+
+        // Here we tell Android to execute our Intent / message
         startActivity(weekListIntent);
     }
 
@@ -58,7 +73,7 @@ public class MainActivity extends ListActivity {
 
     public class CanteenListAdapter extends BaseAdapter
     {
-        ArrayList<String> canteens = new ArrayList<String>();
+        ArrayList<CanteenItem> canteens = new ArrayList<CanteenItem>();
 
         @Override
         public int getCount() {
@@ -75,6 +90,10 @@ public class MainActivity extends ListActivity {
             return 0;
         }
 
+        public List<CanteenItem> getList() {
+            return canteens;
+        }
+
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
@@ -82,18 +101,10 @@ public class MainActivity extends ListActivity {
             }
 
             TextView titleView = (TextView)view.findViewById(android.R.id.text1);
-            titleView.setText(canteens.get(i));
+            CanteenItem canteenItem = canteens.get(i);
+            titleView.setText(canteenItem.getName());
 
             return view;
-        }
-
-        public void downloadCanteens() {
-            //TODO: download list using REST API
-            canteens.add("Rotvoll");
-            canteens.add("Stavanger");
-
-            //Notifies the view (observer) that the adapter state has changed
-            notifyDataSetChanged();
         }
     }
 }
