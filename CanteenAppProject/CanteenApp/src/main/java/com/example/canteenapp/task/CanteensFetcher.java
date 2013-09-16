@@ -1,5 +1,7 @@
 package com.example.canteenapp.task;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.BaseAdapter;
@@ -34,15 +36,19 @@ public class CanteensFetcher extends AsyncTask<Void, ArrayList<CanteenItem>, Arr
     public static final String url = "http://canteen-app.herokuapp.com/canteens";
     private final List<CanteenItem> canteens;
     private final MainActivity.CanteenListAdapter adapter;
+    private final Activity activity;
+    private ProgressDialog progressDialog;
 
-    public CanteensFetcher(MainActivity.CanteenListAdapter canteenListAdapter) {
+    public CanteensFetcher(MainActivity.CanteenListAdapter canteenListAdapter, Activity activity) {
         canteens = canteenListAdapter.getList();
         adapter = canteenListAdapter;
+        this.activity = activity;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        progressDialog = ProgressDialog.show(activity, "Loading..", "Loading canteens", true);
     }
 
     @Override
@@ -105,6 +111,10 @@ public class CanteensFetcher extends AsyncTask<Void, ArrayList<CanteenItem>, Arr
         canteens.addAll(items);
 
         adapter.notifyDataSetChanged();
+
+        if(progressDialog!=null) {
+            progressDialog.dismiss();
+        }
     }
 
 }

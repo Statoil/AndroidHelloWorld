@@ -37,7 +37,7 @@ public class MainActivity extends ListActivity {
 
         canteenListAdapter = new CanteenListAdapter();
         setListAdapter(canteenListAdapter);
-        CanteensFetcher canteenFetcher = new CanteensFetcher(canteenListAdapter);
+        CanteensFetcher canteenFetcher = new CanteensFetcher(canteenListAdapter, this);
         canteenFetcher.execute();
 
     }
