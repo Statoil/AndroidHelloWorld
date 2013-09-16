@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +38,6 @@ public class WeekListActivity extends ListActivity {
             return;
         }
 
-
-
         CanteenItem canteenItem = (CanteenItem) intent.getSerializableExtra(MainActivity.CANTEEN_ITEM);
 
         lunchMenuAdapter = new LunchMenuAdapter();
@@ -54,8 +53,7 @@ public class WeekListActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        //TODO: open activity to show menu item details
-        //NB: remember to add that activity to the manifest xml file
+        Toast.makeText(WeekListActivity.this, "Hi there", Toast.LENGTH_LONG).show();
     }
 
     public class LunchMenuAdapter extends BaseAdapter
@@ -68,7 +66,7 @@ public class WeekListActivity extends ListActivity {
         }
 
         @Override
-        public Object getItem(int i) {
+        public LunchMenuItem getItem(int i) {
             return lunches.get(i);
         }
 
@@ -93,6 +91,9 @@ public class WeekListActivity extends ListActivity {
             weekdayName.setText(lunchMenuItem.getWeekDayName());
 
             TextView courseName = (TextView)view.findViewById(android.R.id.text2);
+
+
+
             courseName.setText(lunchMenuItem.getCourseName());
 
             return view;
