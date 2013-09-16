@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.canteenapp.model.CanteenItem;
 import com.example.canteenapp.task.CanteensFetcher;
@@ -33,10 +34,6 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         Log.d(TAG, "Creating MainActivity view");
-        View headerView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
-        TextView headerText = (TextView)headerView.findViewById(android.R.id.text1);
-        headerText.setText("Canteens");
-        getListView().addHeaderView(headerView, null, false);
 
         canteenListAdapter = new CanteenListAdapter();
         setListAdapter(canteenListAdapter);
