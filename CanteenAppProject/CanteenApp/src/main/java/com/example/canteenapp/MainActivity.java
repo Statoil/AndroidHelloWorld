@@ -47,7 +47,11 @@ public class MainActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
 
         System.out.println("Item clicked: " + position);
-        CanteenItem canteenItem = canteenListAdapter.getList().get(position);
+        if(position>=canteenListAdapter.getCount()) {
+            Toast.makeText(MainActivity.this, "Bad count. "+canteenListAdapter.getCount(), Toast.LENGTH_LONG).show();
+            return;
+        }
+        CanteenItem canteenItem = canteenListAdapter.getItem(position);
 
         // We construct a "messaging" object called "Intent" here.
         // This intent tells Android to start the 'WeekListActivity'
@@ -78,7 +82,7 @@ public class MainActivity extends ListActivity {
         }
 
         @Override
-        public Object getItem(int i) {
+        public CanteenItem getItem(int i) {
             return canteens.get(i);
         }
 
@@ -98,7 +102,7 @@ public class MainActivity extends ListActivity {
             }
 
             TextView titleView = (TextView)view.findViewById(android.R.id.text1);
-            CanteenItem canteenItem = canteens.get(i);
+            CanteenItem canteenItem = getItem(i);
             titleView.setText(canteenItem.getName());
 
             return view;
