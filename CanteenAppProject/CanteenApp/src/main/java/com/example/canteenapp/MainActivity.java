@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class MainActivity extends ListActivity {
 
     private CanteenListAdapter canteenListAdapter;
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d(TAG, "Creating MainActivity view");
         View headerView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
         TextView headerText = (TextView)headerView.findViewById(android.R.id.text1);
         headerText.setText("Canteens");
