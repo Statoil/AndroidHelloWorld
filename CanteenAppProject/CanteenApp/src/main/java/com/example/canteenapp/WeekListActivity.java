@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.example.canteenapp.model.CanteenItem;
 import com.example.canteenapp.model.LunchMenuItem;
+import com.example.canteenapp.task.WeekMenuFetcher;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WeekListActivity extends ListActivity {
 
@@ -36,6 +38,7 @@ public class WeekListActivity extends ListActivity {
         }
 
 
+
         CanteenItem canteenItem = (CanteenItem) intent.getSerializableExtra(MainActivity.CANTEEN_ITEM);
 
         lunchMenuAdapter = new LunchMenuAdapter();
@@ -43,8 +46,8 @@ public class WeekListActivity extends ListActivity {
 
         // TODO: Start a new AsyncTask to download the courses for
         // this particular "canteen"
-
-        //lunchMenuAdapter.downloadLunchCourses(canteen);
+        WeekMenuFetcher weekMenuFetcher = new WeekMenuFetcher(lunchMenuAdapter, this);
+        weekMenuFetcher.execute(canteenItem.getId());
     }
 
     @Override
@@ -74,6 +77,10 @@ public class WeekListActivity extends ListActivity {
             return 0;
         }
 
+        public List<LunchMenuItem> getList() {
+            return lunches;
+        }
+
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
@@ -91,6 +98,7 @@ public class WeekListActivity extends ListActivity {
             return view;
         }
 
+        @Deprecated
         public void downloadLunchCourses(String canteen) {
             //TODO: download list using REST API
             lunches.add(new LunchMenuItem("Monday", "Chicken"));
