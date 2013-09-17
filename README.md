@@ -15,3 +15,10 @@ only dummy data is exposed).
 ## VeryVerySimpleAppProject ##
 
 This Android project is so simple that it's funny :-) It basically a single Android activity with a textview, button and a image.
+
+
+
+## Authors ##
+
+* Gøran Hansen
+* Asbjørn Alexander Fellinghaug
