@@ -82,6 +82,8 @@ public class WeekListActivity extends ListActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
+                // If the View item in our ListView has not yet been created,
+                // we need to "Inflate" it first.
                 view = getLayoutInflater().inflate(android.R.layout.two_line_list_item, null);
             }
 
@@ -91,25 +93,9 @@ public class WeekListActivity extends ListActivity {
             weekdayName.setText(lunchMenuItem.getWeekDayName());
 
             TextView courseName = (TextView)view.findViewById(android.R.id.text2);
-
-
-
             courseName.setText(lunchMenuItem.getCourseName());
 
             return view;
-        }
-
-        @Deprecated
-        public void downloadLunchCourses(String canteen) {
-            //TODO: download list using REST API
-            lunches.add(new LunchMenuItem("Monday", "Chicken"));
-            lunches.add(new LunchMenuItem("Tuesday", "Pasta"));
-            lunches.add(new LunchMenuItem("Wednesday", "Fish"));
-            lunches.add(new LunchMenuItem("Thursday", "Salmon"));
-            lunches.add(new LunchMenuItem("Friday", "Beef"));
-
-            //Notifies the view (observer) that the adapter state has changed
-            notifyDataSetInvalidated();
         }
     }
 }
