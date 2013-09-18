@@ -13,7 +13,7 @@ bin/
 gen/
 
 # Local configuration file (sdk path, etc)
-local.properties
+#local.properties
 
 # Eclipse project files
 .classpath
@@ -22,7 +22,7 @@ local.properties
 # Android Studio
 .idea/
 .gradle
-/*/local.properties
+#/*/local.properties
 /*/out
 /*/*/build
 /*/*/production
