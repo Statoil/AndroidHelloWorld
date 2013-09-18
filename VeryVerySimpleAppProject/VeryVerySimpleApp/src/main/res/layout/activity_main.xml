@@ -40,4 +40,13 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <SeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/animationBtn"
+        android:layout_centerHorizontal="true"
+        android:progress="10000"
+        android:indeterminate="false" />
+
 </RelativeLayout>
